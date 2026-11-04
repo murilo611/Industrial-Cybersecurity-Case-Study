@@ -47,13 +47,16 @@ npm run preview
 
 ## Deploy to GitHub Pages
 
-1. Create a GitHub repository named `industrial-cybersecurity-case-study`.
-2. Push this project to its `main` branch.
+1. Use the existing repository `murilo611/Industrial-Cybersecurity-Case-Study` (or create a repository with that exact name).
+2. Upload or push the project files, including `.github/workflows/deploy.yml`, to its `main` branch.
 3. In repository **Settings → Pages**, select **GitHub Actions** as the build and deployment source.
-4. The workflow at `.github/workflows/deploy.yml` builds the Vite site and deploys `dist`.
-5. After the workflow succeeds, GitHub Pages displays the public URL in Pages settings and the deployment environment.
+4. In repository **Settings → Pages**, set **Build and deployment → Source** to **GitHub Actions** (do not select “Deploy from a branch”).
+5. Push to `main` or run **Actions → Deploy to GitHub Pages → Run workflow**.
+6. After the workflow succeeds, GitHub Pages displays the public URL in Pages settings and the deployment environment.
 
-The Vite base path is set to `/industrial-cybersecurity-case-study/` for the GitHub Pages workflow build (`--mode github-pages`). Local development and ordinary local builds use `/`.
+The Vite base path is set to `/Industrial-Cybersecurity-Case-Study/` for the GitHub Pages workflow build (`--mode github-pages`) to match the public repository URL exactly. Local development and ordinary local builds use `/`.
+
+If GitHub Pages is set to **Deploy from a branch**, it serves the repository files directly; that does not compile the React/TypeScript source. Use **GitHub Actions** as the Pages source so the workflow builds the app and deploys the generated `dist` folder.
 
 ## Research integrity
 

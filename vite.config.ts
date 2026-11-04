@@ -3,9 +3,9 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === 'github-pages' ? '/Industrial-Cybersecurity-Case-Study/' : '/',
+  base: mode === 'github-upload' ? './' : '/',
   plugins: [react()],
-  build: {
+  build: mode === 'github-upload' ? {} : {
     rollupOptions: {
       output: {
         manualChunks(id) {

@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:github-upload": "tsc -b && vite build --mode github-upload && node scripts/create-github-upload.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

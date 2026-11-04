@@ -13,7 +13,7 @@ An independent, educational OSINT-based research presentation about the publicly
 - Defensive recommendations mapped to NIST, ISO, ISA/IEC, and OWASP guidance.
 - Proposed three-stage security roadmap.
 - Source bibliography and print-friendly layout.
-- GitHub Actions workflow for GitHub Pages deployment.
+- One-file export for direct GitHub Pages upload.
 
 ## Technology
 
@@ -45,18 +45,23 @@ npm run build
 npm run preview
 ```
 
-## Deploy to GitHub Pages
+## Publish by uploading one file to GitHub
 
-1. Use the existing repository `murilo611/Industrial-Cybersecurity-Case-Study` (or create a repository with that exact name).
-2. Upload or push the project files, including `.github/workflows/deploy.yml`, to its `main` branch.
-3. In repository **Settings → Pages**, select **GitHub Actions** as the build and deployment source.
-4. In repository **Settings → Pages**, set **Build and deployment → Source** to **GitHub Actions** (do not select “Deploy from a branch”).
-5. Push to `main` or run **Actions → Deploy to GitHub Pages → Run workflow**.
-6. After the workflow succeeds, GitHub Pages displays the public URL in Pages settings and the deployment environment.
+The existing GitHub repository currently serves its root `index.html` directly. To avoid a build workflow and folder-upload problems, generate a self-contained HTML page with all application JavaScript and CSS embedded in it:
 
-The Vite base path is set to `/Industrial-Cybersecurity-Case-Study/` for the GitHub Pages workflow build (`--mode github-pages`) to match the public repository URL exactly. Local development and ordinary local builds use `/`.
+```bash
+npm run build:github-upload
+```
 
-If GitHub Pages is set to **Deploy from a branch**, it serves the repository files directly; that does not compile the React/TypeScript source. Use **GitHub Actions** as the Pages source so the workflow builds the app and deploys the generated `dist` folder.
+The upload-ready file is `github-upload/index.html`. It is one standalone HTML file and does not rely on the Vite source tree, `src` directory, `dist`, or GitHub Actions at runtime.
+
+1. Open `github-upload` on your computer and select **only** its `index.html`.
+2. In the GitHub repository, choose **Add file → Upload files** and upload that file at the repository root, replacing the existing root `index.html`. Do not upload it into a new folder.
+3. Commit the change.
+4. In repository **Settings → Pages**, choose **Deploy from a branch**, branch `main`, folder `/(root)`, and save. This direct-upload method does not use GitHub Actions.
+5. Wait for the Pages deployment, then refresh the public URL.
+
+The project source files can also be uploaded to the repository root for reference, but they are not required to run the standalone page. Do not select `src/index.html` or `dist/index.html`; upload exactly `github-upload/index.html`.
 
 ## Research integrity
 
@@ -68,9 +73,11 @@ The method and limitations are documented in [docs/RESEARCH-METHODOLOGY.md](./do
 
 ```text
 .
-├── .github/workflows/deploy.yml
 ├── docs/
 │   └── RESEARCH-METHODOLOGY.md
+├── github-upload/
+│   ├── index.html
+│   └── LEIA-ME.txt
 ├── src/
 │   ├── components/
 │   ├── data/
